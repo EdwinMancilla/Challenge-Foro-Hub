@@ -1,0 +1,2 @@
+ALTER TABLE usuarios
+ADD COLUMN perfiles VARCHAR(255);
