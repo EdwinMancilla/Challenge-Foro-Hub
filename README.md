@@ -70,4 +70,5 @@ Spring Security (JWT)
 Swagger para documentación de API
 
 --AUTOR--
+
 EdwiN Mancilla
