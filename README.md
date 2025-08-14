@@ -71,4 +71,4 @@ Swagger para documentación de API
 
 --AUTOR--
 
-EdwiN Mancilla
+Edwin Mancilla
