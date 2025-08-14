@@ -4,16 +4,14 @@ package challenge.forohub.demo.domain.respuesta;
 import challenge.forohub.demo.domain.topico.Topico;
 import challenge.forohub.demo.domain.usuarios.Usuario;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Table(name = "respuestas")
 @Entity(name = "Respuesta")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -31,11 +29,21 @@ public class Respuesta {
     private Topico topico;
 
     @Column(name = "fecha_creacion")
-    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
     private Boolean solucion;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "autor_id")
     private Usuario autor;
+
+
+    public Respuesta(String mensaje, Usuario autor, Topico topico) {
+        this.mensaje = mensaje;
+        this.autor = autor;
+        this.topico = topico;
+        this.fechaCreacion = LocalDateTime.now();
+        this.solucion = false;
+    }
 
 }

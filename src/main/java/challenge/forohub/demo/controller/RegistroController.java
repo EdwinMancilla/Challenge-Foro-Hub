@@ -4,6 +4,7 @@ package challenge.forohub.demo.controller;
 import challenge.forohub.demo.domain.usuarios.DatosRegistroUsuario;
 import challenge.forohub.demo.domain.usuarios.Usuario;
 import challenge.forohub.demo.domain.usuarios.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/registro")
+@SecurityRequirement(name = "bearer-key")
 public class RegistroController {
 
     @Autowired
@@ -36,8 +38,12 @@ public class RegistroController {
 
 
 
+        if(usuarioRepo.existsByEmail(datos.email())){
+            return ResponseEntity.badRequest().body("El email ya está en uso");
+        }
+
         if(usuarioRepo.existsByLogin(datos.login())){
-            return ResponseEntity.badRequest().body("El login ya está en uso");
+            return ResponseEntity.badRequest().body("El Nombre ya está en uso");
         }
 
         usuarioRepo.save(usuario);

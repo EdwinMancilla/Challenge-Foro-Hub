@@ -4,6 +4,7 @@ import challenge.forohub.demo.domain.curso.CursoEnum;
 import challenge.forohub.demo.domain.topico.*;
 import challenge.forohub.demo.domain.usuarios.Usuario;
 import challenge.forohub.demo.domain.usuarios.UsuarioRepository;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
@@ -34,7 +36,7 @@ public class TopicoController {
         UserDetails autorDetails = usuarioRepo.findByLogin(datos.autorLogin());
 
         if (autorDetails == null) {
-            return ResponseEntity.badRequest().body("No existe usuario con ese login");
+            return ResponseEntity.badRequest().body("No existe usuario con ese email");
         }
 
         if (!(autorDetails instanceof Usuario)) {
